@@ -1,0 +1,67 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Atlas",
+    "description": "Essa é uma documentação sobre a atlas API.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "andreg.diniz97@hotmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post":{
+        "tags": ["Users"],
+        "summary": "Create a User",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "UserTest",
+                  "email": "user@hotmail.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created."
+          },
+          "400": {
+            "description": "User already exists."
+          }
+        }
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "List all Users",
+        "description": "Faz a listagem de todos os usuários. Para fazer essa requisição é necessário que o usuário seja um administrador.",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "ID do usuário (administrador)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "style": "simple"
+          }
+        ]
+      }
+    }
+  }
+}
